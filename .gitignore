@@ -1,2 +1,2 @@
-./melate/secrets.py
-./melate/config.py
+melate/secrets.py
+melate/config.py
