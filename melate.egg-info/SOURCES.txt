@@ -1,0 +1,9 @@
+MANIFEST.in
+melate/__init__.py
+melate/config.py
+melate/melate.py
+melate.egg-info/PKG-INFO
+melate.egg-info/SOURCES.txt
+melate.egg-info/dependency_links.txt
+melate.egg-info/requires.txt
+melate.egg-info/top_level.txt
