@@ -15,7 +15,8 @@ app.config.update(dict(
 	MYSQL_DB=my_db,
 	SECRET_KEY=my_secret_key,
 	MYSQL_USER=my_user,
-	MYSQL_PASSWORD=my_password
+	MYSQL_PASSWORD=my_password,
+	MYSQL_CURSORCLASS='DictCursor'
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
@@ -27,7 +28,9 @@ def sorteos():
 	cur = mysql.connection.cursor()
 	cur.execute("SELECT * FROM melate LIMIT 20")
 	rv = cur.fetchall()
-	return str(rv)
+	for ja in rv:
+
+	return str(stra)
 
 if __name__ == '__main__':
 	app.run(debug=True)
