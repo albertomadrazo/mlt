@@ -27,11 +27,16 @@ mysql = MySQL(app)
 def sorteos():
 	cur = mysql.connection.cursor()
 	cur.execute("SELECT * FROM melate LIMIT 20")
-	rv = cur.fetchall()
-	for ja in rv:
-		print(ja)
-		
-	return str(rv)
+	# rv = cur.fetchall()
+	concursos = cur.fetchall()
+
+	# for ja in rv:
+	# 	print(ja)
+	# 	print('\n')
+
+	print(concursos)
+
+	return render_template('index.html', concursos=concursos)
 
 if __name__ == '__main__':
 	app.run(debug=True)
