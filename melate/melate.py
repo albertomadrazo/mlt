@@ -29,8 +29,9 @@ def sorteos():
 	cur.execute("SELECT * FROM melate LIMIT 20")
 	rv = cur.fetchall()
 	for ja in rv:
-
-	return str(stra)
+		print(ja)
+		
+	return str(rv)
 
 if __name__ == '__main__':
 	app.run(debug=True)

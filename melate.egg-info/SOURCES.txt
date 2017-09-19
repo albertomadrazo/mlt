@@ -1,6 +1,5 @@
 MANIFEST.in
 melate/__init__.py
-melate/config.py
 melate/melate.py
 melate.egg-info/PKG-INFO
 melate.egg-info/SOURCES.txt

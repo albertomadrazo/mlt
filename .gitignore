@@ -1,2 +1,3 @@
 melate/secrets.py
 melate/config.py
+*.pyc
