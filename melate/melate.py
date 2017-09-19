@@ -34,7 +34,7 @@ def sorteos():
 	# 	print(ja)
 	# 	print('\n')
 
-	print(concursos)
+	# print(concursos)
 
 	return render_template('index.html', concursos=concursos)
 

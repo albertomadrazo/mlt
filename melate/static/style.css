@@ -1,0 +1,37 @@
+.encabezado{
+	text-align: center;
+}
+
+.cont-concurso{
+	background-color:#eee;
+	margin-bottom:18px;
+	text-align:center;
+	padding:24px;
+	width:auto;
+}
+
+.num-concurso{
+	display:inline-block;
+}
+
+.bolsa{
+	text-transform:uppercase;
+	font-weight:bold;
+	font-size:36px;
+}
+
+.pelota{
+	background-color:orange;
+	border-radius:50%; 
+	display:inline-block;
+	font-size:30px;
+	height:60px; 
+	width:60px; 
+}
+
+.pelota span{ display:block; height:100%; line-height:60px; margin:auto; text-align: center;}
+
+.pelota-adicional{
+	background-color:yellow;
+	margin-left:18px;
+}

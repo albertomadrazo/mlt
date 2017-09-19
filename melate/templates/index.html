@@ -1,7 +1,29 @@
 {% extends "layout.html" %}
 {% block body %}
-    <h2>Concursos:</h2>
-    {% for c in concursos %}
-        <strong>{{ c.FECHA_CONCURSO }}</strong> {{ c.R1 }} {{ c.R2 }} {{ c.R3 }} {{ c.R4 }} {{ c.R5 }} {{ c.R6 }} {{ c.R7 }} {{ c.R8 }} BOLSA: {{ c.BOLSA }}<br>
-    {%endfor %}
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	    <h1 class="encabezado">Concursos recientes</h1>
+	    {% for c in concursos %}
+    	<div class="cont-concurso">
+			<div class="num-concurso">
+				concurso #<span>{{ c.CONCURSO }}</span>
+			</div>
+    		<div class="cont-pelotas">
+				<div class="pelota"><span>{{ c.R1 }}</span></div>
+				<div class="pelota"><span>{{ c.R2 }}</span></div>
+				<div class="pelota"><span>{{ c.R3 }}</span></div>
+				<div class="pelota"><span>{{ c.R4 }}</span></div>
+				<div class="pelota"><span>{{ c.R5 }}</span></div>
+				<div class="pelota"><span>{{ c.R6 }}</span></div>
+				<div class="pelota pelota-adicional"><span>{{ c.R7 }}</span></div>
+    		</div>
+        	<strong>{{ c.FECHA_CONCURSO }}</strong>
+        	<div class="bolsa">
+        		bolsa: {{ c.BOLSA }}<br>
+        	</div>
+    	</div>
+	    {%endfor %}
+		
+	</div>
+</div>
 {% endblock %}
