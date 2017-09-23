@@ -25,7 +25,8 @@
 	border-radius:50%; 
 	display:inline-block;
 	font-size:30px;
-	height:60px; 
+	height:60px;
+	position: relative;
 	width:60px; 
 }
 
@@ -35,3 +36,19 @@
 	background-color:yellow;
 	margin-left:18px;
 }
+
+.num-stats-cont{
+	background-color: #ED7D36;
+	border: 6px solid #FF6633;
+	border-radius: 5px;
+	display: none;
+	height: auto;
+	min-height: 180px;
+	padding: 12px;
+	position: absolute;
+	width: 240px;
+}
+
+.num-stats-cont div:first-of-type{ font-size: 40px; font-weight: bold; text-align:center; }
+
+.ocurrencias{ font-weight: bold; }

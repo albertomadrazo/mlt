@@ -26,4 +26,12 @@
 		
 	</div>
 </div>
+<div class="num-stats-cont">
+    <div></div>
+    <span>N&uacute;mero de ocurrencias: <span class="ocurrencias"></span></span>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='concursos.js') }}"></script>
 {% endblock %}
