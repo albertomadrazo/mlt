@@ -30,7 +30,7 @@
 	width:60px; 
 }
 
-.pelota span{ display:block; height:100%; line-height:60px; margin:auto; text-align: center;}
+.pelota span{ display:block; height:100%; line-height:60px; margin:auto; text-align: center; }
 
 .pelota-adicional{
 	background-color:yellow;
