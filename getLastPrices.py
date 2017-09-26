@@ -26,6 +26,8 @@ rowan = tabla_resultados.findAll('tr')
 
 sorteos = []
 
+print('procesando...')
+
 for r in rowan:
     tede = r.findAll('td')
     sorteo = []
@@ -36,4 +38,14 @@ for r in rowan:
     sorteos.append(sorteo)
 
 
-print(sorteos)
+for s in sorteos:
+    if len(s) > 0:
+        print('Sorteo {}\tFecha: {}\tNúmeros: {}'.format(*s))
+        s[2] = s[2].replace('-', ' ').split(' ')
+        for i, num in enumerate(s[2]):
+            if num[0] == '0':
+                print('$$$$$$$$', num)
+                s[2][i] = num[1:]
+                print('----->', num)
+
+        print(s[2])
