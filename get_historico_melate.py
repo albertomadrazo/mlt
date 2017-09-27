@@ -36,26 +36,26 @@ def format_line_to_list(line):
         line[-1] = datetime.datetime.strptime(line[-1], '%d/%m/%Y').date()
         return line
     except ValueError:
-        return []    
+        return False    
 
 
 def get_csv_from_url(url, archivo_destino):
     """
     Descarga el archivo CSV del sitio de pronósticos
     """
-    if not os.path.exists(archivo_destino):
+    try:
         with urllib.request.urlopen(url) as response, open(archivo_destino, 'wb') as out_file:
             shutil.copyfileobj(response, out_file)
-    else:
+        return True
+    except OSError:
+        print('No se pudo abrir el archivo')
         return False
-
-    return True
 
 
 def agregar_records_a_tabla(lista_concursos):
     clave_melate = 40
     for lista in lista_concursos:
-        try:
+        if lista:
             concurso = int(lista[1])
             num1 = int(lista[2])
             num2 = int(lista[3])
@@ -66,17 +66,16 @@ def agregar_records_a_tabla(lista_concursos):
             num7 = int(lista[8])
             bolsa = int(lista[9])
             fecha = lista[10]
-        except IndexError:
-            pass
 
-        try:
-            with connection.cursor() as cursor:
-                query = "INSERT INTO melate2("
-                query += "producto, concurso, num1, num2, num3, num4, num5, num6, num7, bolsa, fecha)"
-                query += " VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                cursor.execute(query, (clave_melate, concurso, num1, num2, num3, num4, num5, num6, num7, bolsa, fecha))
-        finally:
-            connection.commit()
+            try:
+                with connection.cursor() as cursor:
+                    query = "INSERT INTO melate2("
+                    query += "producto, concurso, num1, num2, num3, num4, num5, num6, num7, bolsa, fecha)"
+                    query += " VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                    cursor.execute(query, (clave_melate, concurso, num1, num2, num3, num4, num5, num6, num7, bolsa, fecha))
+                    connection.commit()
+            finally:
+                pass
 
 
 def get_concurso():
@@ -98,19 +97,16 @@ def actualizar_tabla(url, archivo_csv):
     Actualiza la tabla melate2 si el último concurso en el CSV es mayor al
     que está en la tabla.
     """
-    concurso_csv = checa_ultimo_concurso_de_csv(url, archivo_csv)
+    concurso_csv = int(checa_ultimo_concurso_de_csv(url, archivo_csv))
     concurso_reciente = get_concurso()
 
     if concurso_csv == concurso_reciente:
         print("El concurso {} es el más reciente en la base de datos de melate.".format(concurso_csv))
-    elif int(concurso_csv) > concurso_reciente:
+    elif concurso_csv > concurso_reciente:
         lista_concursos = []
         # Iterar el archivo CSV desde el concurso que tenemos en nuestra db
         archivo = open(archivo_csv)
         for i, linea in enumerate(list(archivo.readlines())):
-            if i == 0:
-                continue
-
             # Formatear cada linea y meter el contenido en una lista
             tmp = format_line_to_list(linea)
             if int(tmp[1]) > concurso_reciente:
