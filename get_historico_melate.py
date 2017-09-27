@@ -6,15 +6,15 @@ import os
 import pymysql
 import pymysql.cursors
 
-from .melate.secrets import my_db, my_secret_key, my_user, my_password
+from secrets import my_db, my_user, my_password
 
 
 # Conecta a MySQL
 connection = pymysql.connect(
     host='localhost',
-    user='',
-    password='',
-    db='melate',
+    db=my_db,
+    user=my_user,
+    password=my_password,
     charset='utf8mb4',
     cursorclass=pymysql.cursors.DictCursor
 ) 

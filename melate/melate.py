@@ -6,7 +6,7 @@ import datetime
 from flask_mysqldb import MySQL
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 
-from .secrets import my_db, my_secret_key, my_user, my_password
+from secrets import my_db, my_secret_key, my_user, my_password
 
 locale.setlocale(locale.LC_ALL, "es_MX.utf8")
 
