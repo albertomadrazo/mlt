@@ -6,20 +6,20 @@
 	    {% for c in concursos %}
     	<div class="cont-concurso">
 			<div class="num-concurso">
-				concurso #<span>{{ c.CONCURSO }}</span>
+				concurso #<span>{{ c.concurso }}</span>
 			</div>
     		<div class="cont-pelotas">
-				<div class="pelota"><span>{{ c.R1 }}</span></div>
-				<div class="pelota"><span>{{ c.R2 }}</span></div>
-				<div class="pelota"><span>{{ c.R3 }}</span></div>
-				<div class="pelota"><span>{{ c.R4 }}</span></div>
-				<div class="pelota"><span>{{ c.R5 }}</span></div>
-				<div class="pelota"><span>{{ c.R6 }}</span></div>
-				<div class="pelota pelota-adicional"><span>{{ c.R7 }}</span></div>
+				<div class="pelota"><span>{{ c.num1 }}</span></div>
+				<div class="pelota"><span>{{ c.num2 }}</span></div>
+				<div class="pelota"><span>{{ c.num3 }}</span></div>
+				<div class="pelota"><span>{{ c.num4 }}</span></div>
+				<div class="pelota"><span>{{ c.num5 }}</span></div>
+				<div class="pelota"><span>{{ c.num6 }}</span></div>
+				<div class="pelota pelota-adicional"><span>{{ c.num7 }}</span></div>
     		</div>
-        	<strong>{{ c.FECHA_CONCURSO }}</strong>
+        	<strong>{{ c.fecha }}</strong>
         	<div class="bolsa">
-        		bolsa: {{ c.BOLSA }}<br>
+        		bolsa: {{ c.bolsa }}<br>
         	</div>
     	</div>
 	    {%endfor %}

@@ -28,12 +28,12 @@ mysql = MySQL(app)
 @app.route('/')
 def sorteos():
 	cur = mysql.connection.cursor()
-	cur.execute("SELECT * FROM melate LIMIT 3")
+	cur.execute("SELECT * FROM melate2 ORDER BY concurso DESC LIMIT 5")
 	concursos = cur.fetchall()
 
 	for c in concursos:
-		fecha_formateada = strftime("%A %d de %B, %Y", c['FECHA_CONCURSO'].timetuple())
-		c['FECHA_CONCURSO'] = fecha_formateada.decode('utf8')
+		fecha_formateada = strftime("%A %d de %B, %Y", c['fecha'].timetuple())
+		c['fecha'] = fecha_formateada.decode('utf8')
 
 	return render_template('index.html', concursos=concursos)
 
@@ -43,9 +43,9 @@ def numero():
 	numero = request.args.get('n')
 	cur = mysql.connection.cursor()
 	ocurrencias = 0
-	query = "SELECT COUNT(*) FROM melate WHERE R1='"+numero+ \
-			"' OR R2='"+numero+"' OR R3='"+numero+"' OR R4='"+numero+ \
-			"' OR R5='"+numero+"' OR R6='"+numero+"' OR R7='"+numero+"'"
+	query = "SELECT COUNT(*) FROM melate2 WHERE num1='"+numero+ \
+			"' OR num2='"+numero+"' OR num3='"+numero+"' OR num4='"+numero+ \
+			"' OR num5='"+numero+"' OR num6='"+numero+"' OR num7='"+numero+"'"
 	cur.execute(query)
 	historia_numero = cur.fetchall()[0]['COUNT(*)']
 
