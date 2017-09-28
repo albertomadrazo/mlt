@@ -32,11 +32,8 @@ def convert_csv_to_list(archivo_destino):
 
 def format_line_to_list(line):
     line = line.replace('\n', '').split(',')
-    try:
-        line[-1] = datetime.datetime.strptime(line[-1], '%d/%m/%Y').date()
-        return line
-    except ValueError:
-        return False    
+    line[-1] = datetime.datetime.strptime(line[-1], '%d/%m/%Y').date()
+    return line
 
 
 def get_csv_from_url(url, archivo_destino):
@@ -46,6 +43,8 @@ def get_csv_from_url(url, archivo_destino):
     try:
         with urllib.request.urlopen(url) as response, open(archivo_destino, 'wb') as out_file:
             shutil.copyfileobj(response, out_file)
+            lineas = open(archivo_destino).readlines()
+            open(archivo_destino, 'w').writelines(lineas[1:])
         return True
     except OSError:
         print('No se pudo abrir el archivo')
@@ -76,7 +75,7 @@ def agregar_records_a_tabla(lista_concursos):
                     connection.commit()
             finally:
                 pass
-
+    return True
 
 def get_concurso():
     try:
@@ -114,25 +113,21 @@ def actualizar_tabla(url, archivo_csv):
             else:
                 break
 
-        agregar_records_a_tabla(lista_concursos)
+        if agregar_records_a_tabla(lista_concursos) == True:
+            print('Se ha actualizado la base de datos.')
 
 
 def checa_ultimo_concurso_de_csv(url, archivo_csv):
     existe = False
-    if not os.path.exists(archivo_csv):
-        if get_csv_from_url(url, archivo) == True:
-            existe = True
-        else:
-            print('No se puede acceder al archivo CSV.')
-    else:
+    if get_csv_from_url(url, archivo_csv) == True:
         existe = True
+    else:
+        print('No se puede acceder al archivo CSV.')
 
     if existe == True:
         archivo = open(archivo_csv)
-        ultimo_concurso = archivo.readlines()[1].split(',')[1]
+        ultimo_concurso = archivo.readlines()[0].split(',')[1]
         return ultimo_concurso
-
-    return existe
 
 
 def main():
