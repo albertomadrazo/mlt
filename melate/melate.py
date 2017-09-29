@@ -4,11 +4,12 @@ from time import strftime
 import datetime
 
 from flask_mysqldb import MySQL
-from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
+from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, jsonify
 
 from secrets import my_db, my_secret_key, my_user, my_password
 
 locale.setlocale(locale.LC_ALL, "es_MX.utf8")
+
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -45,11 +46,24 @@ def numero():
 	ocurrencias = 0
 	query = "SELECT COUNT(*) FROM melate2 WHERE num1='"+numero+ \
 			"' OR num2='"+numero+"' OR num3='"+numero+"' OR num4='"+numero+ \
-			"' OR num5='"+numero+"' OR num6='"+numero+"' OR num7='"+numero+"'"
+			"' OR num5='"+numero+"' OR num6='"+numero+"'"
 	cur.execute(query)
-	historia_numero = cur.fetchall()[0]['COUNT(*)']
+	ocurrencias_natural = cur.fetchall()[0]['COUNT(*)']
 
-	return str(historia_numero)
+	query = "SELECT COUNT(*) FROM melate2 WHERE num7="+numero
+	cur.execute(query)
+	ocurrencias_adicional = cur.fetchall()[0]['COUNT(*)']
+
+	context = {
+		'ocurrencias_natural': ocurrencias_natural, 
+		'ocurrencias_adicional': ocurrencias_adicional, 
+		'total_ocurrencias':int(ocurrencias_natural)+int(ocurrencias_adicional)
+	}
+
+	return jsonify(context)
+
+# funcionalidades de la app
+# La cantidad de veces que ha salido cierto numero
 
 
 if __name__ == '__main__':

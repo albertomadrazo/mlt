@@ -6,9 +6,14 @@ $(function(){
         var numero = $(this).text();
         var numeroOver = $(this).find('span').html();
         var ocurrencias = $.get('numero', {n:numeroOver}).done(function(data){
+            console.log(data);
+            var resultados = data;
+            console.log('res: '+ resultados);
             $('.num-stats-cont').show();
             $('.num-stats-cont div:first-of-type').html(numero);
-            $('.ocurrencias').html(data);
+            $('.total-ocurrencias').html(resultados.total_ocurrencias);
+            $('.ocurrencias-natural').html(resultados.ocurrencias_natural);
+            $('.ocurrencias-adicional').html(resultados.ocurrencias_adicional);
         });
     }, function(){ $('.num-stats-cont').hide(); });
 
