@@ -1,8 +1,11 @@
+beautifulsoup4==4.6.0
 click==6.7
 Flask==0.12.2
 Flask-MySQLdb==0.2.0
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
+-e git+https://github.com/albertomadrazo/mlt.git@d97ce12ee5b260b6b726acea860c612208d4ef12#egg=melate
 mysqlclient==1.3.12
+PyMySQL==0.7.11
 Werkzeug==0.12.2
